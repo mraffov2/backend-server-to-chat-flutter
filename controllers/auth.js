@@ -1,7 +1,6 @@
 const {response} = require('express');
 const bcrypt = require('bcryptjs');
 
-const user = require('../models/user');
 const User = require('../models/user');
 const { generateJWT } = require('../helpers/jsonwebtoken');
 
@@ -17,7 +16,7 @@ const createUser = async (req, res = response) => {
         
         if(emailExist){
             console.log(`The email ${email} is already registered in the database`)
-            return res.status(400).json({
+            return res.status(404).json({
                 ok: false,
                 message: 'There was a problem registering the new user',
             })
@@ -40,7 +39,7 @@ const createUser = async (req, res = response) => {
         res.status(201).json({
             ok: true,
             message: 'User created',
-            user,
+            user: user,
             token
         })
     } catch (error) {
@@ -63,16 +62,16 @@ const singinUser = async (req, res = response) => {
         const user = await User.findOne({email});
 
         if(!user){
-            return res.status(400).json({
+            return res.status(404).json({
                 ok: false,
                 message: 'User or email incorrect',
             })
         }
 
         //Check password
-        const validatePassword = bcrypt.compareSync(password, user.password)
+        const validatePassword =  bcrypt.compareSync(password, user.password)
         if(!validatePassword){
-            return res.status(400).json({
+            return res.status(404).json({
                 ok: false,
                 message: 'User or email incorrect',
             })

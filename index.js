@@ -22,7 +22,12 @@ const publicPath = path.resolve(__dirname, "public");
 
 //Routes
 app.use('/api', require('./routes/auth'));
+app.use('/api', require('./routes/users'));
+app.use('/api', require('./routes/message'));
+
+//Routes No found
 app.use('/api', require('./routes/routeNoFound'));
+
 
 app.use(express.static(publicPath));
 

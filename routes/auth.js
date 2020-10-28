@@ -14,13 +14,13 @@ const { validateJWT } = require('../middlewares/validar-jwt');
 router.post('/create_user', [
     check('name', 'The field name is required').not().isEmpty(),
     check('email', 'Email is required').not().isEmpty().isEmail().withMessage('Email incorrect'),
-    check('password', 'The field password is required' ).not().isEmpty().isLength({ min: 5 }).withMessage('Must be at least 5 chars long'),
+    check('password', 'The field password is required' ).not().isEmpty(),
     validarCampos
 ], createUser);
 
 router.post('/singin', [
-    check('email', 'Email incorrect').isEmail(),
-    check('password', 'The field password is required' ).not().isEmpty().isLength({ min: 5 }).withMessage('Must be at least 5 chars long'),
+    check('email', 'Email is required').not().isEmpty(),
+    check('password', 'Password is required' ).not().isEmpty(),
     validarCampos
 ], singinUser)
 
