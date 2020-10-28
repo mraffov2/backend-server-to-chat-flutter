@@ -2,6 +2,7 @@ const { io } = require("../index");
 const { checkJWT } = require('../helpers/jsonwebtoken')
 const {userConected, userDisconected, saveMessage} = require('../controllers/socket')
 
+
 //Mensajes Socket
 io.on("connection",  (client) => {
   

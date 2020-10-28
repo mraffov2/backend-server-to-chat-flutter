@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const { dbConection } = require("./database/config");
 require("dotenv").config();
+const cors = require('cors')
 
 //APP de express
 const app = express();
@@ -16,6 +17,8 @@ const server = require("http").createServer(app);
 module.exports.io = require("socket.io")(server);
 
 require("./sockets/sockets");
+
+app.use(cors());
 
 //PATH publico
 const publicPath = path.resolve(__dirname, "public");
