@@ -38,6 +38,7 @@ server.listen(process.env.PORT, (err) => {
   if (err) throw new Error(err);
 
   console.log(`App listening on por ${process.env.PORT} `);
+  console.log(server.address());
 });
 
 
